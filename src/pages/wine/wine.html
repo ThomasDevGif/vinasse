@@ -15,7 +15,7 @@
 <ion-content padding>
 
     <ion-list *ngIf="wines">
-      <ion-item *ngFor="let wine of wines">
+      <ion-item *ngFor="let wine of wines" (click)="openWineDetailsPage(wine)">
         <ion-icon name="wine" item-start [ngClass]="{'wine-red':wine.type === 'Rouge', 'wine-pink':wine.type === 'Rosé', 'wine-white':wine.type === 'Blanc'}"></ion-icon>
         <h2>{{wine.designation}}</h2>
         <h3>{{wine.producer}}</h3>

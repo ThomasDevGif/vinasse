@@ -5,6 +5,7 @@ import { MyApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
 import { WinePage } from '../pages/wine/wine';
+import { WineDetailsPage } from '../pages/wine-details/wine-details';
 import { WineCreatePage } from '../pages/wine-create/wine-create';
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -19,6 +20,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     WineCreatePage,
     WinePage,
+    WineDetailsPage,
     TabsPage
   ],
   imports: [
@@ -32,6 +34,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     WineCreatePage,
     WinePage,
+    WineDetailsPage,
     TabsPage
   ],
   providers: [
