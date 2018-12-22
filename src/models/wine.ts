@@ -4,6 +4,6 @@ export class Wine {
     year: number;
     designation: string;
     producer: string;
-    quantity: string;
+    quantity: number;
     comment: string;
 }
