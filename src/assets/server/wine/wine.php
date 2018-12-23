@@ -16,7 +16,7 @@ class Item {
 
 	// create item
 	public function create() {
-		$stmt = $this->conn->prepare("INSERT INTO item (
+		$stmt = $this->conn->prepare("INSERT INTO wine (
 			type,
 			year,
 			designation,

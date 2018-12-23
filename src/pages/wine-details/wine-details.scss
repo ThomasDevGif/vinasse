@@ -1,3 +1,12 @@
 page-wine-details {
+    .card-container {
+        position: relative;
+    }
 
+    .button-more {
+        position: absolute;
+        top:0;
+        right:0;
+        z-index: 10;
+    }
 }

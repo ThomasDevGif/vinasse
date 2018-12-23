@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { NavController, NavParams } from 'ionic-angular';
 import { Wine } from '../../models/wine';
 import { Helper } from '../../models/helper';
+import { RestProvider } from '../../providers/rest.provider';
+import { WinePage } from '../wine/wine';
 
 @Component({
   selector: 'page-wine-create',
@@ -23,7 +25,8 @@ export class WineCreatePage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public fb: FormBuilder) {
+    public fb: FormBuilder,
+    private restProvider: RestProvider) {
     this.initializeForm();
   }
 
@@ -64,8 +67,11 @@ export class WineCreatePage {
       comment: this.commentCtrl.value
     }
 
-    // TODO send to server
-    console.log(wine);
+    this.restProvider.createWine(wine).then((res) => {
+      this.wineForm.reset();
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
 }

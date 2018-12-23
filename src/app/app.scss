@@ -47,3 +47,17 @@
 .wine-white {
     color: #FFEE58;
 }
+
+// Color
+.background-grey {
+    background-color: map_get($colors, light-grey);
+}
+
+// Override
+ion-card {
+    border-radius: 8px !important;
+}
+
+ion-navbar {
+    background-color: map_get($colors, primary) !important;
+}

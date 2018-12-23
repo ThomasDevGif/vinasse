@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>Ajouter un vin</ion-title>
   </ion-navbar>
 </ion-header>
@@ -39,6 +39,6 @@
         <ion-textarea rows="5" formControlName="comment" name="comment"></ion-textarea>
       </ion-item>
     </ion-list>
-    <button ion-button color="secondary" type="submit">Valider</button>
+    <button ion-button color="secondary" type="submit" round [disabled]="wineForm.invalid">Valider</button>
   </form>
 </ion-content>

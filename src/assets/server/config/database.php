@@ -2,9 +2,9 @@
 class Database{
 
     private $host = "rdbms.strato.de";
-    private $db_name = "DB2754312";
-    private $username = "U2754312";
-    private $password = "daumesnil01";
+    private $db_name = "DB3604921";
+    private $username = "U3604921";
+    private $password = "Vinasse01+";
 
     // get the database connection
     public function getConnection(){
