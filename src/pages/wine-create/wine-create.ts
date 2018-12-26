@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Wine } from '../../models/wine';
 import { Helper } from '../../models/helper';
 import { RestProvider } from '../../providers/rest.provider';
 import { WinePage } from '../wine/wine';
+import { ToastProvider } from '../../providers/toast.provider';
 
 @Component({
   selector: 'page-wine-create',
@@ -26,7 +27,9 @@ export class WineCreatePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public fb: FormBuilder,
-    private restProvider: RestProvider) {
+    private restProvider: RestProvider,
+    private loadingController: LoadingController,
+    private toastProvider: ToastProvider) {
     this.initializeForm();
   }
 
@@ -57,6 +60,7 @@ export class WineCreatePage {
    * Send wine to the server
    */
   public submitWine(): void {
+    // New wine object
     const wine: Wine = {
       id: null,
       type: this.typeCtrl.value,
@@ -67,10 +71,18 @@ export class WineCreatePage {
       comment: this.commentCtrl.value
     }
 
+    // Loader
+    const loader = this.loadingController.create({content: "Chargement..."});
+    loader.present();
+
+    // Http call
     this.restProvider.createWine(wine).then((res) => {
       this.wineForm.reset();
+      loader.dismiss();
     }).catch((error) => {
       console.log(error);
+      loader.dismiss();
+      this.toastProvider.showErrorToast('Erreur lors de la création du vin');
     });
   }
 

@@ -1,0 +1,36 @@
+<form (ngSubmit)="submit()" [formGroup]="wineForm" text-center>
+  <ion-list>
+    <ion-item>
+      <ion-label>Type</ion-label>
+      <ion-select formControlName="type" name="type">
+        <ion-option *ngFor="let type of helper.types" value="{{type}}">{{type}}</ion-option>
+      </ion-select>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label fixed>Année</ion-label>
+      <ion-input type="number" formControlName="year" name="year"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label fixed>Appelation</ion-label>
+      <ion-input type="text" formControlName="designation" name="designation"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label fixed>Producteur</ion-label>
+      <ion-input type="text" formControlName="producer" name="producer"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label fixed>Quantité</ion-label>
+      <ion-input type="number" formControlName="quantity" name="quantity"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label fixed>Commentaire</ion-label>
+      <ion-textarea rows="5" formControlName="comment" name="comment"></ion-textarea>
+    </ion-item>
+  </ion-list>
+  <button ion-button color="secondary" type="submit" round [disabled]="wineForm.invalid">{{buttonText}}</button>
+</form>

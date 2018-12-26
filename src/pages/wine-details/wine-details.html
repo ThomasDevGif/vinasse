@@ -1,6 +1,11 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>{{wine.designation}}</ion-title>
+    <ion-buttons end *ngIf="currentQuantity != wine.quantity">
+      <button ion-button icon-only (click)="saveWine()">
+        <ion-icon name="checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

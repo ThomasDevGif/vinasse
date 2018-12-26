@@ -1,7 +1,9 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, PopoverController } from 'ionic-angular';
+import { NavController, NavParams, PopoverController, LoadingController } from 'ionic-angular';
 import { WineDetailsMenuPage } from './wine-details-menu/wine-details-menu';
 import { Wine } from '../../models/wine';
+import { RestProvider } from '../../providers/rest.provider';
+import { ToastProvider } from '../../providers/toast.provider';
 
 @Component({
   selector: 'page-wine-details',
@@ -11,12 +13,18 @@ export class WineDetailsPage {
 
   @ViewChild('popoverContent', { read: ElementRef }) content: ElementRef;
   public wine: Wine;
+  public currentQuantity: number;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private popoverCtrl: PopoverController) {
+    private popoverCtrl: PopoverController,
+    private restProvider: RestProvider,
+    private loadingController: LoadingController,
+    private toastProvider: ToastProvider) {
+
     this.wine = navParams.get('data');
+    this.currentQuantity = this.wine.quantity;
   }
   
   /**
@@ -38,7 +46,24 @@ export class WineDetailsPage {
    * @param event Event
    */
   public openWineMenu(event: any): void {
-    let popover = this.popoverCtrl.create(WineDetailsMenuPage);
+    let popover = this.popoverCtrl.create(WineDetailsMenuPage, {data: this.wine});
     popover.present({ev: event});
+  }
+
+  /**
+   * Save wine new quantity
+   */
+  public saveWine(): void {
+    const loader = this.loadingController.create({content: "Chargement..."});
+    loader.present();
+    this.restProvider.updateWine(this.wine).then((res) => {
+      console.log(res);
+      this.currentQuantity = this.wine.quantity;
+      loader.dismiss();
+    }).catch((error) => {
+      console.log(error);
+      loader.dismiss();
+      this.toastProvider.showErrorToast('Erreur lors de la sauvegarde du vin');
+    });
   }
 }

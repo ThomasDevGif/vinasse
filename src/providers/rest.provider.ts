@@ -7,15 +7,13 @@ export class RestProvider {
 
   private baseUrl = './assets/server/';
 
-  constructor(public http: HttpClient) {
-    console.log('Hello RestProvider Provider');
-  }
+  constructor(public http: HttpClient) {}
 
   /**
    * Add a wine in database
    * @param wine Wine to create
    */
-  createWine(wine: Wine) : Promise<any> {
+  public createWine(wine: Wine) : Promise<any> {
     return this.http.post(this.baseUrl + 'wine/createWine.php', wine)
     .toPromise()
     .catch(this.handleError);
@@ -24,8 +22,18 @@ export class RestProvider {
   /**
    * Get wines from database
    */
-  getWines() : Promise<any> {
+  public getWines() : Promise<any> {
     return this.http.get(this.baseUrl + 'wine/getWines.php')
+    .toPromise()
+    .catch(this.handleError);
+  }
+
+  /**
+   * Update a wine in database
+   * @param wine Wine to update
+   */
+  public updateWine(wine: Wine) : Promise<any> {
+    return this.http.post(this.baseUrl + 'wine/updateWine.php', wine)
     .toPromise()
     .catch(this.handleError);
   }

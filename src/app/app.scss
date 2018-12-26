@@ -48,9 +48,18 @@
     color: #FFEE58;
 }
 
-// Color
 .background-grey {
     background-color: map_get($colors, light-grey);
+}
+
+.toast-error .toast-wrapper {
+    opacity: 0.9;
+    background-color: map_get($colors, red);
+}
+
+.toast-sucess .toast-wrapper {
+    opacity: 0.9;
+    background-color: map_get($colors, green);
 }
 
 // Override
