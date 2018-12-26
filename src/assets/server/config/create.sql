@@ -6,5 +6,5 @@ CREATE TABLE wine
   designation VARCHAR(50) NOT NULL,
   producer VARCHAR(50) NOT NULL,
   quantity INT NOT NULL,
-  comment VARCHAR(100) NOT NULL
+  comment VARCHAR(100)
 );

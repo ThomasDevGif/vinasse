@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Wine } from '../../models/wine';
 import { Helper } from '../../models/helper';
@@ -7,10 +7,9 @@ import { Helper } from '../../models/helper';
   selector: 'wine-form',
   templateUrl: 'wine-form.html'
 })
-export class WineFormComponent {
+export class WineFormComponent implements OnInit {
 
   @Input() public wine: Wine;
-  @Input() public buttonText: string;
 
   public helper: Helper = new Helper();
 
@@ -24,6 +23,12 @@ export class WineFormComponent {
 
   constructor(public fb: FormBuilder) {
     this.initializeForm();
+  }
+
+  public ngOnInit(): void {
+    if (this.wine) {
+      this.fillFormData();
+    }
   }
 
   /**
@@ -47,10 +52,6 @@ export class WineFormComponent {
     });
 
     this.typeCtrl.setValue(this.helper.types[0]);
-
-    if (this.wine) {
-      this.fillFormData();
-    }
   }
 
   /**
@@ -63,6 +64,13 @@ export class WineFormComponent {
     this.producerCtrl.setValue(this.wine.producer);
     this.quantityCtrl.setValue(this.wine.quantity);
     this.commentCtrl.setValue(this.wine.comment);
+  }
+
+  /**
+   * Send form data to server
+   */
+  public submit(): void {
+    
   }
 
 }

@@ -39,6 +39,16 @@ export class RestProvider {
   }
 
   /**
+   * Delete a wine in database
+   * @param wineId Wine's id to delete
+   */
+  public deleteWine(wineId: number) : Promise<any> {
+    return this.http.post(this.baseUrl + 'wine/deleteWine.php', wineId)
+    .toPromise()
+    .catch(this.handleError);
+  }
+
+  /**
    * Generic function to reject promise
    */
   private handleError(error: any): Promise<any> {

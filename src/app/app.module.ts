@@ -8,7 +8,6 @@ import { AboutPage } from '../pages/about/about';
 import { WinePage } from '../pages/wine/wine';
 import { WineEditPage } from '../pages/wine-edit/wine-edit';
 import { WineDetailsPage } from '../pages/wine-details/wine-details';
-import { WineDetailsMenuPage } from '../pages/wine-details/wine-details-menu/wine-details-menu';
 import { WineCreatePage } from '../pages/wine-create/wine-create';
 import { TabsPage } from '../pages/tabs/tabs';
 import { NoResultComponent } from '../components/no-result/no-result';
@@ -27,7 +26,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     WinePage,
     WineEditPage,
     WineDetailsPage,
-    WineDetailsMenuPage,
     TabsPage,
     NoResultComponent,
     WineFormComponent
@@ -45,7 +43,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     WinePage,
     WineEditPage,
     WineDetailsPage,
-    WineDetailsMenuPage,
     TabsPage,
     NoResultComponent,
     WineFormComponent

@@ -15,9 +15,8 @@
     <ion-list *ngIf="wines">
       <ion-item *ngFor="let wine of wines" (click)="openWineDetailsPage(wine)">
         <ion-icon name="water" item-start [ngClass]="{'wine-red':wine.type === 'Rouge', 'wine-pink':wine.type === 'Rosé', 'wine-white':wine.type === 'Blanc'}"></ion-icon>
-        <h2>{{wine.designation}}</h2>
+        <h2>{{wine.year}} - {{wine.designation}}</h2>
         <h3>{{wine.producer}}</h3>
-        <p>{{wine.year}}</p>
         <ion-badge item-end color="primary">{{wine.quantity}}</ion-badge>
       </ion-item>
     </ion-list>

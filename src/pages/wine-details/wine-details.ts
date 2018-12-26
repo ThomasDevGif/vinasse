@@ -1,9 +1,9 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, PopoverController, LoadingController } from 'ionic-angular';
-import { WineDetailsMenuPage } from './wine-details-menu/wine-details-menu';
+import { NavController, NavParams, LoadingController, ActionSheetController } from 'ionic-angular';
 import { Wine } from '../../models/wine';
 import { RestProvider } from '../../providers/rest.provider';
 import { ToastProvider } from '../../providers/toast.provider';
+import { WineEditPage } from '../wine-edit/wine-edit';
 
 @Component({
   selector: 'page-wine-details',
@@ -17,11 +17,11 @@ export class WineDetailsPage {
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams,
-    private popoverCtrl: PopoverController,
+    private navParams: NavParams,
     private restProvider: RestProvider,
     private loadingController: LoadingController,
-    private toastProvider: ToastProvider) {
+    private toastProvider: ToastProvider,
+    private actionSheetCtrl: ActionSheetController) {
 
     this.wine = navParams.get('data');
     this.currentQuantity = this.wine.quantity;
@@ -42,12 +42,34 @@ export class WineDetailsPage {
   }
 
   /**
-   * Open context menu to manager wine card
+   * Open action sheet to manage wine card
    * @param event Event
    */
-  public openWineMenu(event: any): void {
-    let popover = this.popoverCtrl.create(WineDetailsMenuPage, {data: this.wine});
-    popover.present({ev: event});
+  public openWineActionSheet(): void {
+    const actionSheet = this.actionSheetCtrl.create({
+      title: 'Options',
+      buttons: [
+        {
+          text: 'Modifier',
+          role: 'destructive',
+          icon: 'create',
+          handler: () => { this.openWineEditPage('Modifier'); }
+        }, {
+          text: 'Dupliquer',
+          icon: 'git-branch',
+          handler: () => { this.openWineEditPage('Dupliquer'); }
+        }, {
+          text: 'Supprimer',
+          icon: 'trash',
+          handler: () => { this.deleteWine(); }
+        }, {
+          text: 'Annuler',
+          role: 'cancel',
+          icon: 'close'
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
   /**
@@ -65,5 +87,31 @@ export class WineDetailsPage {
       loader.dismiss();
       this.toastProvider.showErrorToast('Erreur lors de la sauvegarde du vin');
     });
+  }
+
+  /**
+   * Delete wine in database
+   */
+  public deleteWine(): void {
+    const loader = this.loadingController.create({content: "Chargement..."});
+    loader.present();
+    this.restProvider.deleteWine(this.wine.id).then((res) => {
+      console.log(res);
+      loader.dismiss();
+      this.navCtrl.pop();
+      this.toastProvider.showSuccessToast('Le vin a été supprimé');
+    }).catch((error) => {
+      console.log(error);
+      loader.dismiss();
+      this.toastProvider.showErrorToast('Erreur lors de la suppression du vin');
+    });
+  }
+
+  /**
+   * Open wine details
+   * @param wine Selected wine
+   */
+  public openWineEditPage(title: string): void {
+    this.navCtrl.push(WineEditPage, {data: this.wine, title: title});
   }
 }

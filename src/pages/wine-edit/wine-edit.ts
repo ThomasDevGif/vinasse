@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
+import { Wine } from '../../models/wine';
 
 @Component({
   selector: 'page-wine-edit',
@@ -7,11 +8,16 @@ import { NavController } from 'ionic-angular';
 })
 export class WineEditPage {
 
-  public title: string = 'Title';
+  public wine: Wine;
+  public title: string;
   public buttonText: string = 'Button';
 
-  constructor(public navCtrl: NavController) {
-
+  constructor(
+    public navCtrl: NavController,
+    private navParams: NavParams) {
+    this.title = navParams.get('title');
+    this.wine = navParams.get('data');
   }
 
+  
 }

@@ -11,5 +11,10 @@ $id = $data;
 
 $stmt=$db->prepare("DELETE FROM wine WHERE id=:id");
 $stmt->bindParam(':id', $id);
-$stmt->execute();
+
+if ($stmt->execute()) {
+    http_response_code(200);
+} else {
+    http_response_code(500);
+}
 ?>
