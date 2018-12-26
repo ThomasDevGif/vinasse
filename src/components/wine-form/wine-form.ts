@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Wine } from '../../models/wine';
 import { Helper } from '../../models/helper';
@@ -10,6 +10,7 @@ import { Helper } from '../../models/helper';
 export class WineFormComponent implements OnInit {
 
   @Input() public wine: Wine;
+  @Output() submitFunction = new EventEmitter<Object>();
 
   public helper: Helper = new Helper();
 
@@ -67,10 +68,19 @@ export class WineFormComponent implements OnInit {
   }
 
   /**
-   * Send form data to server
+   * Call function from child to parent
    */
-  public submit(): void {
-    
-  }
+  public submitFromComponent(): void {
+    const wineData = {
+      id: this.wine.id,
+      type: this.typeCtrl.value,
+      year: this.yearCtrl.value,
+      designation: this.designationCtrl.value,
+      producer: this.producerCtrl.value,
+      quantity: this.quantityCtrl.value,
+      comment: this.commentCtrl.value
+    }
 
+    this.submitFunction.next(wineData);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ActionSheetController } from 'ionic-angular';
 import { Wine } from '../../models/wine';
 import { RestProvider } from '../../providers/rest.provider';
@@ -11,7 +11,7 @@ import { WineEditPage } from '../wine-edit/wine-edit';
 })
 export class WineDetailsPage {
 
-  @ViewChild('popoverContent', { read: ElementRef }) content: ElementRef;
+  private parentPage: any;
   public wine: Wine;
   public currentQuantity: number;
 
@@ -22,9 +22,14 @@ export class WineDetailsPage {
     private loadingController: LoadingController,
     private toastProvider: ToastProvider,
     private actionSheetCtrl: ActionSheetController) {
-
+    
+    this.parentPage = navParams.get('parentPage');
     this.wine = navParams.get('data');
     this.currentQuantity = this.wine.quantity;
+  }
+
+  ionViewWillLeave() {
+    this.parentPage.loadWines();
   }
   
   /**
@@ -79,11 +84,9 @@ export class WineDetailsPage {
     const loader = this.loadingController.create({content: "Chargement..."});
     loader.present();
     this.restProvider.updateWine(this.wine).then((res) => {
-      console.log(res);
       this.currentQuantity = this.wine.quantity;
       loader.dismiss();
     }).catch((error) => {
-      console.log(error);
       loader.dismiss();
       this.toastProvider.showErrorToast('Erreur lors de la sauvegarde du vin');
     });
@@ -96,12 +99,10 @@ export class WineDetailsPage {
     const loader = this.loadingController.create({content: "Chargement..."});
     loader.present();
     this.restProvider.deleteWine(this.wine.id).then((res) => {
-      console.log(res);
       loader.dismiss();
       this.navCtrl.pop();
       this.toastProvider.showSuccessToast('Le vin a été supprimé');
     }).catch((error) => {
-      console.log(error);
       loader.dismiss();
       this.toastProvider.showErrorToast('Erreur lors de la suppression du vin');
     });

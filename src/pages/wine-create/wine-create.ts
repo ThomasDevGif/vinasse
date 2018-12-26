@@ -79,8 +79,8 @@ export class WineCreatePage {
     this.restProvider.createWine(wine).then((res) => {
       this.wineForm.reset();
       loader.dismiss();
+      this.toastProvider.showSuccessToast('Le vin a été ajouté');
     }).catch((error) => {
-      console.log(error);
       loader.dismiss();
       this.toastProvider.showErrorToast('Erreur lors de la création du vin');
     });
