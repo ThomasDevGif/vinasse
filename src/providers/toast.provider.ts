@@ -8,12 +8,11 @@ export class ToastProvider {
 
   /**
    * Generic method to create toast
-   * @param message Message
    */
-  private showToast(message: string, css: string): void {
+  private showToast(message: string, css: string, duration: number): void {
     const toast = this.toastController.create({
       message: message,
-      duration: 3000,
+      duration: duration,
       cssClass: css
     });
     toast.present();
@@ -24,7 +23,7 @@ export class ToastProvider {
    * @param message Message
    */
   public showSuccessToast(message: string): void {
-    this.showToast(message, 'toast-sucess');
+    this.showToast(message, 'toast-sucess', 1500);
   }
 
   /**
@@ -32,7 +31,7 @@ export class ToastProvider {
    * @param message Message
    */
   public showErrorToast(message: string): void {
-    this.showToast(message, 'toast-error');
+    this.showToast(message, 'toast-error', 3000);
   }
 
 }

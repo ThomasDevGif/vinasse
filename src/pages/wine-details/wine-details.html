@@ -15,7 +15,8 @@
         <ion-card-title>{{wine.title}}</ion-card-title>
         <ion-list>
           <ion-item>
-            <ion-icon name="water" item-start [ngClass]="{'wine-red':wine.type === 'Rouge', 'wine-pink':wine.type === 'Rosé', 'wine-white':wine.type === 'Blanc'}"></ion-icon>
+            <ion-icon name="water" item-start
+            [ngClass]="{'wine-red':wine.type.includes('Rouge'), 'wine-pink':wine.type.includes('Rosé'), 'wine-white':wine.type.includes('Blanc')}"></ion-icon>
             <h2 class="details-item">Type</h2>
             <p class="details-desc">{{wine.type}}</p>
           </ion-item>

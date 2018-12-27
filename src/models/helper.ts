@@ -1,5 +1,6 @@
 export class Helper {
     public Helper() {}
 
-    public types: string[] = ['Rouge', 'Blanc', 'Rosé', 'Vin pétillant'];
+    public types: any[] = ['1-Rouge', '2-Blanc', '3-Blanc Moelleux', '4-Rosé', '5-Vin Pétillant'];
+    
 }
