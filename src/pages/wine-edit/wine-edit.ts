@@ -20,9 +20,15 @@ export class WineEditPage {
     private restProvider: RestProvider,
     private loadingController: LoadingController,
     private toastProvider: ToastProvider) {
+    this.getParams();
+  }
 
-    this.title = navParams.get('title');
-    this.wine = navParams.get('data');
+  /**
+   * Get nav params
+   */
+  private getParams(): void {
+    this.title = this.navParams.get('title');
+    this.wine = this.navParams.get('data');
   }
 
   /**

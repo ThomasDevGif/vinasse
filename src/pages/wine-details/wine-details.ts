@@ -22,14 +22,20 @@ export class WineDetailsPage {
     private loadingController: LoadingController,
     private toastProvider: ToastProvider,
     private actionSheetCtrl: ActionSheetController) {
-    
-    this.parentPage = navParams.get('parentPage');
-    this.wine = navParams.get('data');
-    this.currentQuantity = this.wine.quantity;
+    this.getParams();
   }
 
   ionViewWillLeave() {
     this.parentPage.loadWines();
+  }
+
+  /**
+   * Get nav params
+   */
+  private getParams(): void {
+    this.parentPage = this.navParams.get('parentPage');
+    this.wine = this.navParams.get('data');
+    this.currentQuantity = this.wine.quantity;
   }
   
   /**
