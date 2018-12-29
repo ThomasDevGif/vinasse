@@ -25,10 +25,6 @@ export class WineDetailsPage {
     this.getParams();
   }
 
-  ionViewWillLeave() {
-    this.parentPage.loadWines();
-  }
-
   /**
    * Get nav params
    */
@@ -106,6 +102,7 @@ export class WineDetailsPage {
     loader.present();
     this.restProvider.deleteWine(this.wine.id).then((res) => {
       loader.dismiss();
+      this.removeWineInParentPage();
       this.navCtrl.pop();
       this.toastProvider.showSuccessToast('Le vin a été supprimé');
     }).catch((error) => {
@@ -115,10 +112,20 @@ export class WineDetailsPage {
   }
 
   /**
+   * Remove the wine in list without reloading all wines
+   */
+  private removeWineInParentPage(): void {
+    const index = this.parentPage.wines.indexOf(this.wine, 0);
+      if (index > -1) {
+        this.parentPage.wines.splice(index, 1);
+      }
+  }
+
+  /**
    * Open wine details
    * @param wine Selected wine
    */
   public openWineEditPage(title: string): void {
-    this.navCtrl.push(WineEditPage, {data: this.wine, title: title});
+    this.navCtrl.push(WineEditPage, {data: this.wine, title: title, parentPage: this});
   }
 }

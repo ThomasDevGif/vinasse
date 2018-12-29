@@ -10,6 +10,7 @@ import { ToastProvider } from '../../providers/toast.provider';
 })
 export class WineEditPage {
 
+  public parentPage: any;
   public wine: Wine;
   public title: string;
   public buttonText: string = 'Button';
@@ -27,6 +28,7 @@ export class WineEditPage {
    * Get nav params
    */
   private getParams(): void {
+    this.parentPage = this.navParams.get('parentPage');
     this.title = this.navParams.get('title');
     this.wine = this.navParams.get('data');
   }
@@ -53,6 +55,7 @@ export class WineEditPage {
     this.restProvider.updateWine(wine).then((res) => {
       loader.dismiss();
       this.toastProvider.showSuccessToast('Le vin a été modifié');
+      this.parentPage.wine = wine;
       this.navCtrl.pop();
     }).catch(() => {
       loader.dismiss();
@@ -70,7 +73,7 @@ export class WineEditPage {
     loader.present();
     this.restProvider.createWine(wine).then((res) => {
       loader.dismiss();
-      this.toastProvider.showSuccessToast('Le vin a été ajouté');
+      this.toastProvider.showSuccessToast('Le vin a été ajouté -> actualiser');
       this.navCtrl.pop();
     }).catch(() => {
       loader.dismiss();

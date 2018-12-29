@@ -42,7 +42,7 @@ export class WineCreatePage {
     this.designationCtrl = this.fb.control('', [Validators.required]);
     this.producerCtrl = this.fb.control('', [Validators.required]);
     this.quantityCtrl = this.fb.control('', [Validators.required]);
-    this.commentCtrl = this.fb.control('', [Validators.required]);
+    this.commentCtrl = this.fb.control('');
 
     this.wineForm = this.fb.group({
       type: this.typeCtrl,
@@ -79,7 +79,7 @@ export class WineCreatePage {
     this.restProvider.createWine(wine).then((res) => {
       this.wineForm.reset();
       loader.dismiss();
-      this.toastProvider.showSuccessToast('Le vin a été ajouté');
+      this.toastProvider.showSuccessToast('Le vin a été ajouté -> actualiser');
     }).catch((error) => {
       loader.dismiss();
       this.toastProvider.showErrorToast('Erreur lors de la création du vin');
