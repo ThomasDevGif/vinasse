@@ -3,6 +3,7 @@ import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Wine } from '../../models/wine';
 import { RestProvider } from '../../providers/rest.provider';
 import { ToastProvider } from '../../providers/toast.provider';
+import { WineProvider } from '../../providers/wine.provider';
 
 @Component({
   selector: 'page-wine-edit',
@@ -20,7 +21,8 @@ export class WineEditPage {
     private navParams: NavParams,
     private restProvider: RestProvider,
     private loadingController: LoadingController,
-    private toastProvider: ToastProvider) {
+    private toastProvider: ToastProvider,
+    private wineProvider: WineProvider) {
     this.getParams();
   }
 
@@ -52,10 +54,12 @@ export class WineEditPage {
   private updateWine(wine: Wine): void {
     const loader = this.loadingController.create({content: "Chargement..."});
     loader.present();
-    this.restProvider.updateWine(wine).then((res) => {
+    this.restProvider.updateWine(wine).then(() => {
       loader.dismiss();
       this.toastProvider.showSuccessToast('Le vin a été modifié');
-      this.parentPage.wine = wine;
+      this.parentPage.wine = wine; // update wine for WineDetailsPage
+      this.parentPage.currentQuantity = wine.quantity; // do not display the 'check' icon in WineDetailsPage
+      this.wineProvider.updateWine(wine); // update wine for all pages
       this.navCtrl.pop();
     }).catch(() => {
       loader.dismiss();

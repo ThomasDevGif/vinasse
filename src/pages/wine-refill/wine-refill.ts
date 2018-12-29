@@ -8,13 +8,12 @@ import { ToastProvider } from '../../providers/toast.provider';
 import { WineProvider } from '../../providers/wine.provider';
 
 @Component({
-  selector: 'page-wine',
-  templateUrl: 'wine.html',
+  selector: 'page-wine-refill',
+  templateUrl: 'wine-refill.html'
 })
-export class WinePage {
+export class WineRefillPage {
 
   public message: string = 'Aucun résultat';
-  public searchValue: string = '';
 
   constructor(
     private navCtrl: NavController,
@@ -22,10 +21,6 @@ export class WinePage {
     private loadingController: LoadingController,
     private toastProvider: ToastProvider,
     public wineProvider: WineProvider) {
-  }
-
-  ionViewDidLoad() {
-    this.loadWines();
   }
 
   /**
@@ -44,19 +39,10 @@ export class WinePage {
   }
 
   /**
-   * Search wine in list
-   * @param $event Search value
-   */
-  public filterWines($event: any) {
-    this.searchValue = $event.target.value;
-  }
-
-  /**
    * Open wine details
    * @param wine Selected wine
    */
   public openWineDetailsPage(wine: Wine): void {
-    this.navCtrl.push(WineDetailsPage, {data: wine});
+    this.navCtrl.push(WineDetailsPage, {data: wine, parentPage: this});
   }
-
 }

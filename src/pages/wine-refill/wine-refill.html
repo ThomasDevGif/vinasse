@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Hors stock <span *ngIf="wineProvider.getWinesToRefill()">({{wineProvider.getWinesToRefill().length}})</span></ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="loadWines()">
+          <ion-icon name="refresh"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <no-result *ngIf="!wineProvider.getWinesToRefill() || wineProvider.getWinesToRefill().length === 0" [message]="message"></no-result>
+  
+  <ion-list *ngIf="wineProvider.getWinesToRefill()">      
+    <ion-item *ngFor="let wine of wineProvider.getWinesToRefill()" (click)="openWineDetailsPage(wine)" [ngClass]="{'background-grey':wine.comment}">
+      <ion-icon name="water" item-start
+      [ngClass]="{'wine-red':wine.type.includes('Rouge'), 'wine-pink':wine.type.includes('Rosé'), 'wine-white':wine.type.includes('Blanc')}"></ion-icon>
+      <h2>{{wine.year}} - {{wine.designation}}</h2>
+      <h3>{{wine.producer}}</h3>
+      <ion-icon name="arrow-forward" color="primary" item-end></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

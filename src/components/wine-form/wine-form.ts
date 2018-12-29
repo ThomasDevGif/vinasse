@@ -37,11 +37,11 @@ export class WineFormComponent implements OnInit {
    */
   public initializeForm(): void {
     this.typeCtrl = this.fb.control('', [Validators.required]);
-    this.yearCtrl = this.fb.control('', [Validators.required]);
-    this.designationCtrl = this.fb.control('', [Validators.required]);
-    this.producerCtrl = this.fb.control('', [Validators.required]);
-    this.quantityCtrl = this.fb.control('', [Validators.required]);
-    this.commentCtrl = this.fb.control('');
+    this.yearCtrl = this.fb.control('', [Validators.required, Validators.pattern('^[0-9][0-9]*$')]);
+    this.designationCtrl = this.fb.control('', [Validators.required, Validators.maxLength(50)]);
+    this.producerCtrl = this.fb.control('', [Validators.required, Validators.maxLength(50)]);
+    this.quantityCtrl = this.fb.control('', [Validators.required, Validators.pattern('^[0-9][0-9]*$')]);
+    this.commentCtrl = this.fb.control('', [Validators.maxLength(100)]);
 
     this.wineForm = this.fb.group({
       type: this.typeCtrl,

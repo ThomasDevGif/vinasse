@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title><span *ngIf="wines">{{calculateTotal()}} bouteilles</span></ion-title>
+    <ion-title>Bouteilles ({{wineProvider.calculateTotal()}})</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="loadWines()">
         <ion-icon name="funnel"></ion-icon>
@@ -13,10 +13,13 @@
 </ion-header>
 
 <ion-content>
-    <no-result *ngIf="!wines" [message]="message"></no-result>
+    <no-result *ngIf="!wineProvider.getWines()" [message]="message"></no-result>
 
-      <ion-list *ngIf="wines">
-        <ion-item *ngFor="let wine of wines" (click)="openWineDetailsPage(wine)" [ngClass]="{'background-grey':wine.comment}">
+    <div *ngIf="wineProvider.getWines()">
+      <ion-searchbar (ionInput)="filterWines($event)" placeholder="Rechercher"></ion-searchbar>
+
+      <ion-list>
+        <ion-item *ngFor="let wine of wineProvider.getWines() | filter: searchValue" (click)="openWineDetailsPage(wine)" [ngClass]="{'background-grey':wine.comment}">
           <ion-icon name="water" item-start
           [ngClass]="{'wine-red':wine.type.includes('Rouge'), 'wine-pink':wine.type.includes('Rosé'), 'wine-white':wine.type.includes('Blanc')}"></ion-icon>
           <h2>{{wine.year}} - {{wine.designation}}</h2>
@@ -24,4 +27,5 @@
           <ion-badge item-end color="primary">{{wine.quantity}}</ion-badge>
         </ion-item>
       </ion-list>
+    </div>
 </ion-content>

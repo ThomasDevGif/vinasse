@@ -4,6 +4,7 @@ import { Wine } from '../../models/wine';
 import { RestProvider } from '../../providers/rest.provider';
 import { ToastProvider } from '../../providers/toast.provider';
 import { WineEditPage } from '../wine-edit/wine-edit';
+import { WineProvider } from '../../providers/wine.provider';
 
 @Component({
   selector: 'page-wine-details',
@@ -11,7 +12,6 @@ import { WineEditPage } from '../wine-edit/wine-edit';
 })
 export class WineDetailsPage {
 
-  private parentPage: any;
   public wine: Wine;
   public currentQuantity: number;
 
@@ -21,7 +21,8 @@ export class WineDetailsPage {
     private restProvider: RestProvider,
     private loadingController: LoadingController,
     private toastProvider: ToastProvider,
-    private actionSheetCtrl: ActionSheetController) {
+    private actionSheetCtrl: ActionSheetController,
+    private wineProvider: WineProvider) {
     this.getParams();
   }
 
@@ -29,7 +30,6 @@ export class WineDetailsPage {
    * Get nav params
    */
   private getParams(): void {
-    this.parentPage = this.navParams.get('parentPage');
     this.wine = this.navParams.get('data');
     this.currentQuantity = this.wine.quantity;
   }
@@ -85,10 +85,11 @@ export class WineDetailsPage {
   public saveWine(): void {
     const loader = this.loadingController.create({content: "Chargement..."});
     loader.present();
-    this.restProvider.updateWine(this.wine).then((res) => {
+    this.restProvider.updateWine(this.wine).then(() => {
       this.currentQuantity = this.wine.quantity;
+      this.restProvider.updateWine(this.wine);
       loader.dismiss();
-    }).catch((error) => {
+    }).catch(() => {
       loader.dismiss();
       this.toastProvider.showErrorToast('Erreur lors de la sauvegarde du vin');
     });
@@ -100,25 +101,15 @@ export class WineDetailsPage {
   public deleteWine(): void {
     const loader = this.loadingController.create({content: "Chargement..."});
     loader.present();
-    this.restProvider.deleteWine(this.wine.id).then((res) => {
+    this.restProvider.deleteWine(this.wine.id).then(() => {
       loader.dismiss();
-      this.removeWineInParentPage();
+      this.wineProvider.removeWine(this.wine);
       this.navCtrl.pop();
       this.toastProvider.showSuccessToast('Le vin a été supprimé');
-    }).catch((error) => {
+    }).catch(() => {
       loader.dismiss();
       this.toastProvider.showErrorToast('Erreur lors de la suppression du vin');
     });
-  }
-
-  /**
-   * Remove the wine in list without reloading all wines
-   */
-  private removeWineInParentPage(): void {
-    const index = this.parentPage.wines.indexOf(this.wine, 0);
-      if (index > -1) {
-        this.parentPage.wines.splice(index, 1);
-      }
   }
 
   /**
