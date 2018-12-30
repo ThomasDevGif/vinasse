@@ -7,11 +7,20 @@ import { Wine } from '../models/wine';
 })
 
 export class FilterPipe implements PipeTransform {
-    transform(wines: Wine[], filterValue: any): any {
-        let filteredWines = wines.filter(wine => wine.designation.toLowerCase().indexOf(filterValue.toLowerCase()) > -1);
-        if (filteredWines.length === 0) {
-            filteredWines = wines.filter(wine => wine.producer.toLowerCase().indexOf(filterValue.toLowerCase()) > -1); 
-        }
-        return filteredWines;
+
+    public transform(wines: Wine[], filterValue: any): any {
+        var filter = {
+            designation: filterValue,
+            producer: filterValue,
+            comment: filterValue
+        };
+
+        return wines.filter((wine) => {
+            for (var key in filter) {
+                if (!filterValue) return true;
+                if (filterValue && wine[key].toLowerCase().indexOf(filterValue.toLowerCase()) > -1) return true;
+            }
+            return false;
+        });
     }
 }
