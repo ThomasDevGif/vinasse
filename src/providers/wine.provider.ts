@@ -5,6 +5,8 @@ import { Wine } from '../models/wine';
 export class WineProvider {
 
   public wines: Wine[];
+  public winesInStock: Wine[] = [];
+  public winesOutOfStock: Wine[] = [];
   // public wines: Wine[] = [
   //   {id: null, type: 'Rouge', year: 1999, designation: 'Margaux', producer: 'Cadet de Clarence', quantity: 3, comment: ''},
   //   {id: null, type: 'Rouge', year: 2000, designation: 'Pessace Leognan (Graves)', producer: 'Château Haut Vigneau', quantity: 4, comment: 'ok'},
@@ -22,6 +24,11 @@ export class WineProvider {
    */
   public setWines(wines: Wine[]): void {
     this.wines = wines;
+    // wines.forEach((wine) => {
+    //   wine.quantity > 0 ? this.winesInStock.push(wine) : this.winesOutOfStock.push(wine);
+    // });
+    // console.log(this.winesInStock);
+    // console.log(this.winesOutOfStock);
   }
 
   /**
