@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Filtrer
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngIf="wineProvider.selectedTypes">
+    <ion-item *ngFor="let type of helper.types">
+      <ion-label>{{type}}</ion-label>
+      <ion-toggle [(ngModel)]="isToggled[type]" (ionChange)="notify(type)"></ion-toggle>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button color="success" round block (click)="dismiss()">Valider</button>
+</ion-content>

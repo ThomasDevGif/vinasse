@@ -9,6 +9,7 @@ import { WineRefillPage } from '../pages/wine-refill/wine-refill';
 import { WineEditPage } from '../pages/wine-edit/wine-edit';
 import { WineDetailsPage } from '../pages/wine-details/wine-details';
 import { WineCreatePage } from '../pages/wine-create/wine-create';
+import { ModalWineFilterPage } from '../pages/modal-wine-filter/modal-wine-filter';
 import { TabsPage } from '../pages/tabs/tabs';
 import { NoResultComponent } from '../components/no-result/no-result';
 import { WineFormComponent } from '../components/wine-form/wine-form';
@@ -25,6 +26,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     WineRefillPage,
     WineCreatePage,
+    ModalWineFilterPage,
     WinePage,
     WineEditPage,
     WineDetailsPage,
@@ -43,6 +45,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     WineRefillPage,
     WineCreatePage,
+    ModalWineFilterPage,
     WinePage,
     WineEditPage,
     WineDetailsPage,

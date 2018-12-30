@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, ModalController } from 'ionic-angular';
 
 import { WineDetailsPage } from '../wine-details/wine-details';
 import { Wine } from '../../models/wine';
 import { RestProvider } from '../../providers/rest.provider';
 import { ToastProvider } from '../../providers/toast.provider';
 import { WineProvider } from '../../providers/wine.provider';
+import { ModalWineFilterPage } from '../../pages/modal-wine-filter/modal-wine-filter';
 
 @Component({
   selector: 'page-wine',
@@ -18,10 +19,11 @@ export class WinePage {
 
   constructor(
     private navCtrl: NavController,
+    private modalCtrl: ModalController,
     private restProvider: RestProvider,
     private loadingController: LoadingController,
     private toastProvider: ToastProvider,
-    public wineProvider: WineProvider) {
+    public wineProvider: WineProvider,) {
   }
 
   ionViewDidLoad() {
@@ -57,6 +59,13 @@ export class WinePage {
    */
   public openWineDetailsPage(wine: Wine): void {
     this.navCtrl.push(WineDetailsPage, {data: wine});
+  }
+
+  /**
+   * Open modal to filter wines
+   */
+  public openModalFilter(): void {
+    this.modalCtrl.create(ModalWineFilterPage).present();
   }
 
 }
