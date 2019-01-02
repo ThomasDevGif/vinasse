@@ -5,6 +5,7 @@ import { RestProvider } from '../../providers/rest.provider';
 import { ToastProvider } from '../../providers/toast.provider';
 import { WineEditPage } from '../wine-edit/wine-edit';
 import { WineProvider } from '../../providers/wine.provider';
+import { Helper } from '../../models/helper';
 
 @Component({
   selector: 'page-wine-details',
@@ -14,6 +15,7 @@ export class WineDetailsPage {
 
   public wine: Wine;
   public currentQuantity: number;
+  public helper: Helper = new Helper();
 
   constructor(
     public navCtrl: NavController,

@@ -39,13 +39,19 @@
 }
 
 .wine-red {
-    color: #B71C1C;
+    color: map_get($colors, wine-red);
 }
 .wine-pink {
-    color: #F8BBD0;
+    color: map_get($colors, wine-pink);
 }
 .wine-white {
-    color: #FFEE58; //#FFCA28
+    color: map_get($colors, wine-white);
+}
+.wine-white-2 {
+    color: map_get($colors, wine-white-2);
+}
+.wine-sparkling {
+    color: map_get($colors, grey);
 }
 
 .background-grey {

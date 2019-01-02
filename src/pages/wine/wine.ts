@@ -7,6 +7,7 @@ import { RestProvider } from '../../providers/rest.provider';
 import { ToastProvider } from '../../providers/toast.provider';
 import { WineProvider } from '../../providers/wine.provider';
 import { ModalWineFilterPage } from '../../pages/modal-wine-filter/modal-wine-filter';
+import { Helper } from '../../models/helper';
 
 @Component({
   selector: 'page-wine',
@@ -16,6 +17,7 @@ export class WinePage {
 
   public message: string = 'Aucun résultat';
   public searchValue: string = '';
+  public helper: Helper = new Helper();
 
   constructor(
     private navCtrl: NavController,

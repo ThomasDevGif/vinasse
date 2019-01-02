@@ -11,13 +11,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list *ngIf="wineProvider.selectedTypes">
+<ion-content *ngIf="wineProvider.selectedTypes" padding>
+  <ion-list>
+    <ion-item>
+      <ion-label>Tous</ion-label>
+      <ion-toggle [(ngModel)]="isToggledAll" (ionChange)="notifyAll()"></ion-toggle>
+    </ion-item>
+  </ion-list>
+  <ion-list>
     <ion-item *ngFor="let type of helper.types">
       <ion-label>{{type}}</ion-label>
       <ion-toggle [(ngModel)]="isToggled[type]" (ionChange)="notify(type)"></ion-toggle>
     </ion-item>
   </ion-list>
-
   <button ion-button color="success" round block (click)="dismiss()">Valider</button>
 </ion-content>

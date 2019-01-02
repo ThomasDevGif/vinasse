@@ -34,13 +34,19 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
+  // Theme
   primary:    #37474F,
   secondary:  #4CAF50,
   success:    #4CAF50,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #000,
-
+  // Wines
+  wine-red:     #B71C1C,
+  wine-pink:    #F8BBD0,
+  wine-white:   #FFEB3B,
+  wine-white-2: #FFB300,
+  // Colors
   grey:       #757575,
   white:      #fff,
   red:        #F44336,

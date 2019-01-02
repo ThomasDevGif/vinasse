@@ -11,6 +11,7 @@ export class ModalWineFilterPage {
 
   public helper: Helper = new Helper();
   public isToggled = [];
+  public isToggledAll: boolean = false;
 
   constructor(
     private viewCtrl: ViewController,
@@ -26,6 +27,8 @@ export class ModalWineFilterPage {
     this.wineProvider.selectedTypes.forEach((type) => {
       this.isToggled[type] = this.isChecked(type);
     });
+    
+    this.isToggledAll = (this.wineProvider.selectedTypes.length === this.helper.types.length);
   }
 
   /**
@@ -50,6 +53,18 @@ export class ModalWineFilterPage {
         this.wineProvider.selectedTypes.splice(index, 1);
       }
     }
+
+    // this.isToggledAll = (this.wineProvider.selectedTypes.length === this.helper.types.length);
+  }
+
+  /**
+   * Toggle all switch using a single one
+   */
+  public notifyAll(): void {
+    this.helper.types.forEach((type) => {
+      this.isToggled[type] = this.isToggledAll;
+      this.isToggledAll ? this.wineProvider.selectedTypes.push(type) : this.wineProvider.selectedTypes = [] ;
+    });
   }
 
   /**
