@@ -8,6 +8,7 @@ import { ToastProvider } from '../../providers/toast.provider';
 import { WineProvider } from '../../providers/wine.provider';
 import { ModalWineFilterPage } from '../../pages/modal-wine-filter/modal-wine-filter';
 import { Helper } from '../../models/helper';
+import { WineEditPage } from '../wine-edit/wine-edit';
 
 @Component({
   selector: 'page-wine',
@@ -61,6 +62,13 @@ export class WinePage {
    */
   public openWineDetailsPage(wine: Wine): void {
     this.navCtrl.push(WineDetailsPage, {data: wine});
+  }
+
+  /**
+   * Open page to create a new wine in database
+   */
+  public openWineCreatePage() {
+    this.navCtrl.push(WineEditPage, {data: new Wine(), title: 'Ajouter'});
   }
 
   /**

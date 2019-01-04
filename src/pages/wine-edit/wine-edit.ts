@@ -43,7 +43,7 @@ export class WineEditPage {
     if (this.title === 'Modifier') {
       this.updateWine(wine);
     } else {
-      this.duplicateWine(wine);
+      this.createWine(wine);
     }
   }
 
@@ -71,7 +71,7 @@ export class WineEditPage {
    * Duplicate wine in database
    * @param wine Wine to duplicate
    */
-  private duplicateWine(wine: Wine): void {
+  private createWine(wine: Wine): void {
     wine.id = null; // does not create new wine if id not null
     const loader = this.loadingController.create({content: "Chargement..."});
     loader.present();

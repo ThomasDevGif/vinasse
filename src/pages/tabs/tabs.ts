@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { WinePage } from '../wine/wine';
-import { WineCreatePage } from '../wine-create/wine-create';
+import { WineToDrinkPage } from '../wine-todrink/wine-todrink';
 import { WineRefillPage } from '../wine-refill/wine-refill';
 
 @Component({
@@ -10,7 +10,7 @@ import { WineRefillPage } from '../wine-refill/wine-refill';
 export class TabsPage {
 
   tab1Root = WinePage;
-  tab2Root = WineCreatePage;
+  tab2Root = WineToDrinkPage;
   tab3Root = WineRefillPage;
 
   constructor() {

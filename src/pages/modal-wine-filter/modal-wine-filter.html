@@ -14,13 +14,23 @@
 <ion-content *ngIf="wineProvider.selectedTypes" padding>
   <ion-list>
     <ion-item>
-      <ion-label>Tous</ion-label>
+      <ion-label>
+        Tous
+      </ion-label>
       <ion-toggle [(ngModel)]="isToggledAll" (ionChange)="notifyAll()"></ion-toggle>
     </ion-item>
   </ion-list>
   <ion-list>
     <ion-item *ngFor="let type of helper.types">
-      <ion-label>{{type}}</ion-label>
+      <ion-label>
+          <ion-icon name="water" item-start
+          [ngClass]="{'wine-red':type === helper.types[0],
+          'wine-white':type === helper.types[1],
+          'wine-white-2':type === helper.types[2],
+          'wine-pink':type === helper.types[3],
+          'wine-sparkling':type === helper.types[4]}"></ion-icon>
+        {{type}}
+      </ion-label>
       <ion-toggle [(ngModel)]="isToggled[type]" (ionChange)="notify(type)"></ion-toggle>
     </ion-item>
   </ion-list>
