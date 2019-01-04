@@ -49,7 +49,7 @@ export class WineProvider {
    */
   public getWinesToRefill(): Wine[] {
     if (!this.wines) return;
-    return this.wines.filter(wine => wine.quantity === 0);
+    return this.wines.filter(wine => Number(wine.quantity) === 0);
   }
 
   /**
