@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar color="primary">
-        <ion-title>{{title}} <span *ngIf="wines">({{wines.length}})</span></ion-title>
+        <ion-title>{{title}} <span *ngIf="wineProvider.calculateTotal(wines) !== 0">({{wineProvider.calculateTotal(wines)}})</span></ion-title>
         <ion-buttons end>
             <button ion-button icon-only (click)="openModalFilter()">
                 <ion-icon name="funnel"></ion-icon>

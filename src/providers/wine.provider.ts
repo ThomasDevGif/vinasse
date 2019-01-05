@@ -93,10 +93,10 @@ export class WineProvider {
   /**
    * Calculate total of bottles
    */
-  public calculateTotal(): number {
-    if (!this.wines) return 0;
+  public calculateTotal(wines: Wine[]): number {
+    if (!wines) return 0;
     var total = 0;
-    this.wines.forEach(wine => {
+    wines.forEach(wine => {
       total += Number(wine.quantity);
     });
     return total;
