@@ -1,26 +1,25 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
-
-import { WineDetailsPage } from '../wine-details/wine-details';
-import { Wine } from '../../models/wine';
+import { LoadingController, ModalController } from 'ionic-angular';
 import { RestProvider } from '../../providers/rest.provider';
 import { ToastProvider } from '../../providers/toast.provider';
 import { WineProvider } from '../../providers/wine.provider';
+import { ModalWineFilterPage } from '../modal-wine-filter/modal-wine-filter';
 
 @Component({
   selector: 'page-wine-refill',
   templateUrl: 'wine-refill.html'
 })
 export class WineRefillPage {
-
-  public message: string = 'Aucun résultat';
+  
+  public title: string = 'Hors stock';
 
   constructor(
-    private navCtrl: NavController,
+    private modalCtrl: ModalController,
     private restProvider: RestProvider,
     private loadingController: LoadingController,
     private toastProvider: ToastProvider,
     public wineProvider: WineProvider) {
+    this.loadWines();
   }
 
   /**
@@ -39,10 +38,9 @@ export class WineRefillPage {
   }
 
   /**
-   * Open wine details
-   * @param wine Selected wine
+   * Open modal to filter wines
    */
-  public openWineDetailsPage(wine: Wine): void {
-    this.navCtrl.push(WineDetailsPage, {data: wine, parentPage: this});
+  public openModalFilter(): void {
+    this.modalCtrl.create(ModalWineFilterPage).present();
   }
 }

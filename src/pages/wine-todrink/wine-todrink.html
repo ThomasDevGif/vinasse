@@ -1,9 +1,1 @@
-<ion-header>
-<ion-navbar color="primary">
-    <ion-title>A boire dans l'année</ion-title>
-</ion-navbar>
-</ion-header>
-  
-<ion-content>
-    <wine-list [wines]="wineProvider.getWinesToDrink()"></wine-list>
-</ion-content>
+<wine-list [title]="title" [wines]="wineProvider.getWinesToDrink()"></wine-list>

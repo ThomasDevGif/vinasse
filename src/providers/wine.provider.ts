@@ -50,7 +50,11 @@ export class WineProvider {
   public getWinesToDrink(): Wine[] {
     if (!this.wines) return;
     var today = new Date();
-    return this.wines.filter(wine => Number(wine.year) + Number(wine.preservationTime) <= today.getFullYear());
+    return this.wines.filter(wine => {
+      if (wine.quantity > 0 && this.selectedTypes.indexOf(wine.type) > -1
+      && Number(wine.year) + Number(wine.preservationTime) <= today.getFullYear()) return true;
+      return false;
+    });
   }
 
   /**
@@ -58,7 +62,10 @@ export class WineProvider {
    */
   public getWinesToRefill(): Wine[] {
     if (!this.wines) return;
-    return this.wines.filter(wine => Number(wine.quantity) === 0);
+    return this.wines.filter(wine => {
+      if (this.selectedTypes.indexOf(wine.type) > -1 && Number(wine.quantity) == 0) return true;
+      return false;
+    });
   }
 
   /**

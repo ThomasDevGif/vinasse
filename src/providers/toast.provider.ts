@@ -13,7 +13,8 @@ export class ToastProvider {
     const toast = this.toastController.create({
       message: message,
       duration: duration,
-      cssClass: css
+      cssClass: css,
+      position: 'top'
     });
     toast.present();
   }

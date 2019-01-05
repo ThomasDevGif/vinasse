@@ -10,6 +10,8 @@ import { WineProvider } from '../../providers/wine.provider';
 })
 export class WineToDrinkPage {
 
+  public title: string = 'A boire';
+
   constructor(
     private restProvider: RestProvider,
     private loadingController: LoadingController,
@@ -33,5 +35,4 @@ export class WineToDrinkPage {
       this.toastProvider.showErrorToast('Erreur lors de la récupération des vins');
     });
   }
-
 }
