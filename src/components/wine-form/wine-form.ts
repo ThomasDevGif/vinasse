@@ -17,6 +17,7 @@ export class WineFormComponent implements OnInit {
   public wineForm: FormGroup;
   public typeCtrl: FormControl;
   public yearCtrl: FormControl;
+  public preservationTimeCtrl: FormControl;
   public designationCtrl: FormControl;
   public producerCtrl: FormControl;
   public quantityCtrl: FormControl;
@@ -38,6 +39,7 @@ export class WineFormComponent implements OnInit {
   public initializeForm(): void {
     this.typeCtrl = this.fb.control('', [Validators.required]);
     this.yearCtrl = this.fb.control('', [Validators.required, Validators.pattern('^[0-9][0-9]*$')]);
+    this.preservationTimeCtrl = this.fb.control('', [Validators.required, Validators.pattern('^[0-9][0-9]*$')]);
     this.designationCtrl = this.fb.control('', [Validators.required, Validators.maxLength(50)]);
     this.producerCtrl = this.fb.control('', [Validators.required, Validators.maxLength(50)]);
     this.quantityCtrl = this.fb.control('', [Validators.required, Validators.pattern('^[0-9][0-9]*$')]);
@@ -46,6 +48,7 @@ export class WineFormComponent implements OnInit {
     this.wineForm = this.fb.group({
       type: this.typeCtrl,
       year: this.yearCtrl,
+      preservationTime: this.preservationTimeCtrl,
       designation: this.designationCtrl,
       producer: this.producerCtrl,
       quantity: this.quantityCtrl,
@@ -61,6 +64,7 @@ export class WineFormComponent implements OnInit {
   public fillFormData(): void {
     this.typeCtrl.setValue(this.wine.type);
     this.yearCtrl.setValue(this.wine.year);
+    this.preservationTimeCtrl.setValue(this.wine.preservationTime);
     this.designationCtrl.setValue(this.wine.designation);
     this.producerCtrl.setValue(this.wine.producer);
     this.quantityCtrl.setValue(this.wine.quantity);
@@ -75,6 +79,7 @@ export class WineFormComponent implements OnInit {
       id: this.wine.id,
       type: this.typeCtrl.value,
       year: this.yearCtrl.value,
+      preservationTime: this.preservationTimeCtrl.value,
       designation: this.designationCtrl.value,
       producer: this.producerCtrl.value,
       quantity: this.quantityCtrl.value,

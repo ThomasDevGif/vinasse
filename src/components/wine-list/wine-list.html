@@ -1,0 +1,19 @@
+<no-result *ngIf="!wines" [message]="message"></no-result>
+
+<div *ngIf="wines">
+    <ion-searchbar (ionInput)="filterWines($event)" placeholder="Rechercher"></ion-searchbar>
+
+    <ion-list>
+        <ion-item *ngFor="let wine of wines | filter: searchValue" (click)="openWineDetailsPage(wine)" [ngClass]="{'background-grey':wine.comment}">
+        <ion-icon name="water" item-start
+        [ngClass]="{'wine-red':wine.type === helper.types[0],
+        'wine-white':wine.type === helper.types[1],
+        'wine-white-2':wine.type === helper.types[2],
+        'wine-pink':wine.type === helper.types[3],
+        'wine-sparkling':wine.type === helper.types[4]}"></ion-icon>
+        <h2>{{wine.year}} - {{wine.designation}}</h2>
+        <h3>{{wine.producer}}</h3>
+        <ion-badge item-end color="primary">{{wine.quantity}}</ion-badge>
+        </ion-item>
+    </ion-list>
+</div>

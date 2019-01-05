@@ -13,6 +13,7 @@ import { ModalWineFilterPage } from '../pages/modal-wine-filter/modal-wine-filte
 import { TabsPage } from '../pages/tabs/tabs';
 import { NoResultComponent } from '../components/no-result/no-result';
 import { WineFormComponent } from '../components/wine-form/wine-form';
+import { WineListComponent } from '../components/wine-list/wine-list';
 import { FilterPipe } from '../pipes/filter.pipe';
 import { RestProvider } from '../providers/rest.provider';
 import { ToastProvider } from '../providers/toast.provider';
@@ -33,6 +34,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TabsPage,
     NoResultComponent,
     WineFormComponent,
+    WineListComponent,
     FilterPipe
   ],
   imports: [
@@ -51,7 +53,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     WineDetailsPage,
     TabsPage,
     NoResultComponent,
-    WineFormComponent
+    WineFormComponent,
+    WineListComponent
   ],
   providers: [
     StatusBar,
