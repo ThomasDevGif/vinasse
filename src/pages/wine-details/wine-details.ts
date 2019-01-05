@@ -65,7 +65,7 @@ export class WineDetailsPage {
           handler: () => { this.openWineEditPage('Modifier'); }
         }, {
           text: 'Dupliquer',
-          icon: 'git-branch',
+          icon: 'copy',
           handler: () => { this.openWineEditPage('Dupliquer'); }
         }, {
           text: 'Supprimer',

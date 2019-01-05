@@ -11,6 +11,7 @@ $data = json_decode(file_get_contents("php://input"));
 $id = $data->id;
 $type = $data->type;
 $year = $data->year;
+$preservationTime = $data->preservationTime;
 $designation = $data->designation;
 $producer = $data->producer;
 $quantity = $data->quantity;
@@ -23,6 +24,7 @@ $comment = $data->comment;
 $stmt = $db->prepare("UPDATE wine
 SET type = :type,
     year = :year,
+    preservationTime = :preservationTime,
     designation = :designation,
     producer = :producer,
     quantity = :quantity,
@@ -31,6 +33,7 @@ WHERE id = :id");
 
 $stmt->bindParam(":type", $type);
 $stmt->bindParam(":year", $year);
+$stmt->bindParam(":preservationTime", $preservationTime);
 $stmt->bindParam(":designation", $designation);
 $stmt->bindParam(":producer", $producer);
 $stmt->bindParam(":quantity", $quantity);

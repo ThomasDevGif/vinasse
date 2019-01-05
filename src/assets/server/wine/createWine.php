@@ -10,6 +10,7 @@ $data = json_decode(file_get_contents("php://input"));
 // set wine property values
 $type = $data->type;
 $year = $data->year;
+$preservationTime = $data->preservationTime;
 $designation = $data->designation;
 $producer = $data->producer;
 $quantity = $data->quantity;
@@ -18,6 +19,7 @@ $comment = $data->comment;
 $stmt = $db->prepare("INSERT INTO wine (
   type,
   year,
+  preservationTime,
   designation,
   producer,
   quantity,
@@ -26,6 +28,7 @@ $stmt = $db->prepare("INSERT INTO wine (
 VALUES (
   :type,
   :year,
+  :preservationTime,
   :designation,
   :producer,
   :quantity,
@@ -34,6 +37,7 @@ VALUES (
 
 $stmt->bindParam(":type", $type);
 $stmt->bindParam(":year", $year);
+$stmt->bindParam(":preservationTime", $preservationTime);
 $stmt->bindParam(":designation", $designation);
 $stmt->bindParam(":producer", $producer);
 $stmt->bindParam(":quantity", $quantity);

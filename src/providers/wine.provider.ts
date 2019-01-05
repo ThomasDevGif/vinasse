@@ -51,8 +51,10 @@ export class WineProvider {
     if (!this.wines) return;
     var today = new Date();
     return this.wines.filter(wine => {
+      var limitYear = Number(wine.year) + Number(wine.preservationTime) - 1;
+
       if (wine.quantity > 0 && this.selectedTypes.indexOf(wine.type) > -1
-      && Number(wine.year) + Number(wine.preservationTime) <= today.getFullYear()) return true;
+      && (limitYear <= today.getFullYear())) return true;
       return false;
     });
   }
