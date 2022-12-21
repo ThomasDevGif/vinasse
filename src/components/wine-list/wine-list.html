@@ -11,13 +11,13 @@
         </ion-buttons>
     </ion-navbar>
 </ion-header>
-    
-<ion-content>
-    <no-result *ngIf="!wines || wines.lenght === 0" [message]="message"></no-result>
 
-    <div *ngIf="wines || wines.lenght > 0">
+<ion-content>
+    <no-result *ngIf="!wines || wines.length === 0" [message]="message"></no-result>
+
+    <div *ngIf="wines || wines.length > 0">
         <ion-searchbar (ionInput)="filterWines($event)" placeholder="Rechercher"></ion-searchbar>
-    
+
         <ion-list>
             <ion-item *ngFor="let wine of wines | filter: searchValue" (click)="openWineDetailsPage(wine)" [ngClass]="{'background-grey':wine.comment}">
             <ion-icon name="water" item-start

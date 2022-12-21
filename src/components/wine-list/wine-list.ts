@@ -14,7 +14,7 @@ import { ModalWineFilterPage } from '../../pages/modal-wine-filter/modal-wine-fi
 })
 export class WineListComponent {
 
-    @Input() public wines: Wine[];
+    @Input() public wines: Wine[] = [];
     @Input() public title: string;
     public message: string = "Aucun résultat";
     public searchValue: string = '';
